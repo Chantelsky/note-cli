@@ -1,5 +1,7 @@
 import fs from 'node:fs/promises'
-const DB_PATH = new URL('../db.json', import.meta.url).pathname
+import { fileURLToPath } from 'url'
+
+const DB_PATH = fileURLToPath(new URL('../db.json', import.meta.url))
 
 export const getDB = async () => {
   const db = await fs.readFile(DB_PATH, 'utf-8')
@@ -11,9 +13,9 @@ export const saveDB = async (db) => {
   return db
 }
 
-export const insertDB = async (note) => {
+export const insertDB = async (data) => {
   const db = await getDB()
-  db.notes.push(note)
+  db.notes.push(data)
   await saveDB(db)
-  return note
+  return data
 }

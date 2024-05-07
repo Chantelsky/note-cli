@@ -1,14 +1,13 @@
 import { getDB, saveDB, insertDB } from './db.js'
 
 export const newNote = async (note, tags) => {
-  const newNote = {
+  const data = {
     tags,
-    id: Date.now(),
     content: note,
+    id: Date.now(),
   }
-
-  await insertDB(newNote)
-  return newNote
+  await insertDB(data)
+  return data
 }
 
 export const getAllNotes = async () => {
