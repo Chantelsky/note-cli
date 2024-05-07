@@ -11,20 +11,20 @@ export const newNote = async (note, tags) => {
   return newNote
 }
 
-export const allNotes = async () => {
-  const { notes } = await getDB()
-  return notes
+export const getAllNotes = async () => {
+  const db = await getDB()
+  return db.notes
 }
 
 export const findNotes = async (filter) => {
-  const { notes } = await getDB()
+  const notes = await getAllNotes()
   return notes.filter((note) =>
     note.content.toLowerCase().includes(filter.toLowerCase())
   )
 }
 
 export const removeNote = async (id) => {
-  const { notes } = await getAllNotes()
+  const notes = await getAllNotes()
   const match = notes.find((note) => note.id === id)
 
   if (match) {
